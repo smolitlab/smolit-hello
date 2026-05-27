@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
-  ingressClassName: cilium
+  ingressClassName: trafefik
   rules:
   - host: webapp.home.smolit.de
     http:

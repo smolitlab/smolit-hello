@@ -4,12 +4,12 @@ resources:
   - ingress.yaml
 
 commonLabels:
-  app: webapp-v2
+  app: smolit-hello-v2
 
-namespace: webapp
+namespace: smolit-hello
 
 commonAnnotations:
   owner: smolit
 
-namePrefix: webapp-
+namePrefix: smolit-hello-
 nameSuffix: -v2
