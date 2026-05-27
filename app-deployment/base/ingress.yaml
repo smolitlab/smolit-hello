@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
-  ingressClassName: trafefik
+  ingressClassName: traefik
   rules:
   - host: webapp.home.smolit.de
     http:
