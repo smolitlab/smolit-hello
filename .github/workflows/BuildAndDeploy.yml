@@ -90,7 +90,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Set the Kubernetes context
-        uses: azure/k8s-set-context@ae59a723ba9abe7a9655538854a025448dbab4aa # v4.0.2
+        uses: azure/k8s-set-context@8698eba2499e9012f0d5085f8798077cce4bc526 # v5.0.1
         with:
           method: service-account
           k8s-url: ${{ secrets.KUBERNETES_URL }}
