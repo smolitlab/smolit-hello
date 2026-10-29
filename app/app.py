@@ -4,6 +4,9 @@ import logging
 import time
 from flask import Flask, request, render_template
 
+# Without debug mode Flask only logs warnings, keep info logs visible
+logging.basicConfig(level=logging.INFO)
+
 app = Flask(__name__, template_folder='.')
 hostname = socket.gethostname()
 title = os.environ.get("TITLE", "Example App")  
@@ -37,6 +40,8 @@ def home():
     return render_template('index.html', title=title, hostname=hostname, color=color)
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5001)))
+    # No debug mode in the cluster: the Werkzeug debugger allows code execution.
+    # Enable it locally only: FLASK_DEBUG=1 python app.py
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5001)))
     logloop()
     
