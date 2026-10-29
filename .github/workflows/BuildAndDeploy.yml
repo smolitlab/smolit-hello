@@ -59,34 +59,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      # Install mise for managing tools
-      - name: Install mise
-        run: |
-          curl https://mise.jdx.dev/install.sh | sh
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
-
-      # Install tools defined in .mise.toml
+      # mise in a fixed version: the action verifies the signed release before use.
+      # Installs the tools from .mise.toml and puts them on PATH.
+      # Dependabot raises the action, the mise version is raised by hand.
       - name: Install tools with mise
-        run: |
-          echo "=== Running mise install ==="
-          $HOME/.local/bin/mise install -v
-          echo ""
-          echo "=== Installed tools ==="
-          $HOME/.local/bin/mise ls --installed
-          echo ""
-          echo "=== Checking for kubectl and helm in shims ==="
-          ls -la $HOME/.local/bin/k* $HOME/.local/bin/h* 2>&1 || true
-          
-          # Get the actual paths where mise installed the tools
-          KUBECTL_PATH=$($HOME/.local/bin/mise which kubectl)
-          HELM_PATH=$($HOME/.local/bin/mise which helm)
-
-          # Extract the directories
-          KUBECTL_DIR=$(dirname "$KUBECTL_PATH")
-          HELM_DIR=$(dirname "$HELM_PATH")
-
-          # Add both to PATH for subsequent steps
-          echo "$KUBECTL_DIR:$HELM_DIR" >> $GITHUB_PATH
+        uses: jdx/mise-action@8418fedb1110381a0d3ba51a7a415d7c1b884550 # v5.2.2
+        with:
+          version: 2026.10.17
+          cache: false
 
       # Runs a set of commands using the runners shell
       - name: Set the Kubernetes context
