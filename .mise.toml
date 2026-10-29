@@ -2,5 +2,6 @@
 # Set environment variables for your project
 
 [tools]
-kubectl = "latest"
-helm = "latest"
+# Fixed versions, raised by hand (Dependabot does not cover mise).
+# kubectl within one minor version of the cluster (k3s v1.35).
+kubectl = "1.35.9"
